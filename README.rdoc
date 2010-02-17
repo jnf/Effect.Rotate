@@ -1,0 +1,16 @@
+== Effect.Rotate
+===. . .spins me right round
+A designer asked me if I could make an arrow rotate when a user clicked on it. &ldquo;Sure!&rdquo; I said, believing
+that I would find support for that kind of animation in any popular javascript framework. <em>I was wrong</em>, or I
+didn't look hard enough. It's difficult to say. Either way, I decided to take what I'd learned about element
+rotation and slap together a Scripty effect.
+
+The result? <strong>Effect.Rotate</strong>. Takes an element (or element id) and a delta and returns a tween effect that
+rotates the element by the delta. Positive deltas rotate clockwise; negative deltas counter&ndash;clockwise. Check out the
+demos to see <strong>Effect.Rotate</strong> in action.
+
+<strong>Note: Right now, IE support is finicky at best. I'll fix it, or (more likely)
+find someone smarter than me to fix it.</strong>
+
+== License
+Licensed under the terms of the GNU GPL. See the included LICENSE file.

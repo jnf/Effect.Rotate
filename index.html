@@ -1,0 +1,130 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+    <title>Effect.Rotate Demo</title>
+    <link href="lib/stylesheets/reset.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="lib/stylesheets/rotate.css" media="screen" rel="stylesheet" type="text/css" />
+    <script src="lib/javascripts/prototype.js" type="text/javascript"></script>
+    <script src="lib/javascripts/scriptaculous.js" type="text/javascript"></script>
+    <script src="lib/javascripts/easing.js" type="text/javascript"></script>
+    <script src="src/Effect.Rotate.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      document.observe("dom:loaded", function() {
+        $$('div#arrows img').invoke('setOpacity', 0); //hide dial arrows
+        //click observer; triggers rotations
+        $('arrows').observe('click', function(event) {
+          var element = event.element();
+          var delta = element.id == "left-arrow" ? -45 : 45;
+          var value = ($('dv').innerHTML * 1) + (delta > 0 ? -1 : 1);
+          value = value > 7 ? 0 : value;
+          value = value < 0 ? 7 : value;
+          new Effect.Rotate('knob', delta, {
+            duration: .75,
+            queue: { scope: 'knob', limit: 1},
+            transition: Effect.Transitions.Back.easeInOut.custom(1.25),
+            afterFinish: function() { $('dv').update(value); }
+          })
+        });
+
+        //hover observer; triggers opacity
+        $('arrows').observe('mousemove', function(event) {
+          Arrows.check(event.findElement('img'));
+        });
+
+        //mouseout observer; fades active element
+        $('arrows').observe('mouseout', function(event) {
+          Arrows.exit();
+        });
+      });
+
+      var Arrows = {
+        opacityTransition: Effect.Transitions.Cubic.easeIn,
+        active: null,
+        check: function(element) {
+          if (this.active != element) {
+            var over = element;
+            var out = this.active;
+            this.active = element;
+            var effects = $A();
+            effects.push(new Effect.Opacity(over, {
+              sync: true,
+              from: 0,
+              to: 1
+            }));
+            if (out) {
+              effects.push(new Effect.Opacity(out, {
+                sync: true,
+                from: 1,
+                to: 0,
+              }));
+            }
+          }
+
+          this.fire(effects);
+        },
+
+        exit: function() {
+          if (this.active) {
+            var effects = $A();
+            effects.push(new Effect.Opacity(this.active, {
+              sync: true,
+              from: 1,
+              to: 0
+            }));
+            this.active = null;
+            this.fire(effects);
+          }
+        },
+        
+        fire: function(effects) {
+          new Effect.Parallel(effects, {
+            duration: 0.25,
+            transition: this.opacityTransition
+          });
+        }
+      }
+    </script>
+  </head>
+  
+  <body>
+    <h1>Effect.Rotate<em>. . .spins me right round</em></h1>
+    <p class="intro">
+      A designer asked me if I could make an arrow rotate when a user clicked on it. &ldquo;Sure!&rdquo; I said, believing
+      that I would find support for that kind of animation in any popular javascript framework. <em>I was wrong</em>, or I
+      didn't look hard enough. It's difficult to say. Either way, I decided to take what I'd learned about element
+      rotation and slap together a Scripty effect.
+    </p>
+    <p>
+      The result? <strong>Effect.Rotate</strong>. Takes an element (or element id) and a delta and returns a tween effect that
+      rotates the element by the delta. Positive deltas rotate clockwise; negative deltas counter&ndash;clockwise. Check out the
+      demos to see <strong>Effect.Rotate</strong> in action.
+    </p>
+    <p>
+      <strong>Note: Right now, IE support is finicky at best. I'll fix it, or (more likely)
+      find someone smarter than me to fix it.</strong>
+    </p>
+    <div id="demos">
+      <div class="first">
+        <h2>Simple Rotation</h2>
+        <img id="spinner" src="lib/images/spinner.jpg" alt="A silly circle." />
+        <div class="buttons">
+          <button onclick="new Effect.Rotate('spinner', 360, { duration: 1.0 }); return false;">Spin Me Fast!</button>
+          <button onclick="new Effect.Rotate('spinner', 360, { duration: 6.0 }); return false;">Spin Me Slow!</button><br />
+          <button onclick="new Effect.Rotate('spinner', -360, { duration: 3.0}); return false;">Spin Me The Other Way At a Medium Speed.</button>
+        </div>
+      </div>
+      <div class="second">
+        <h2>Dial it Up (or Down)</h2>
+        <p>Dial Value: <span id="dv">0</span></p>
+        <div id="dial">
+          <img id="knob" src="lib/images/dial-knob.png" alt="Turn me on (or off), baby." />
+          <div id="arrows">
+            <img id="left-arrow" src="lib/images/dial-left.png" alt="Counter-clockwise" />
+            <img id="right-arrow" src="lib/images/dial-right.png" alt="Clockwise" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
