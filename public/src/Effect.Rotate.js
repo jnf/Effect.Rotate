@@ -12,11 +12,11 @@ Effect.Rotate = function(element, delta, options) {
   var element = $(element);
   if ("IE" == browser) {
     //get the current rotation
-    var transform = element.getStyle('filter');
-    var degree = transform.match("M11='1.0'") ? 0 : 90;
+    var degree = element.degree ? element.degree * 1 : 0;
     //return the proper tween effect
     return new Effect.Tween(element, degree, degree + delta, options,
       function(pos) {
+        this.degree = pos;
         var radian = pos * (Math.PI * 2 / 360); //convert degree to radians
         var costheta = Math.cos(radian);
         var sintheta = Math.sin(radian);
