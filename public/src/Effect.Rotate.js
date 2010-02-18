@@ -35,7 +35,7 @@ Effect.Rotate = function(element, delta, options) {
     if (rule) {
       //get the current rotation
       var transform = element.getStyle(rule);
-      var degree = transform ? transform.gsub(/\D+/,'') * 1 : 0;
+      var degree = transform ? transform.gsub(/[\(\)a-zA-Z:;\s]+/,'') * 1 : 0;
       //return the proper tween effect
       return new Effect.Tween(element, degree, degree + delta, options,
         function(pos) {
