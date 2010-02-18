@@ -12,5 +12,11 @@ demos to see **Effect.Rotate** in action.
 **Note: Right now, IE support is finicky at best. I'll fix it, or (more likely)
 find someone smarter than me to fix it.**
 
+== Structure & Dependencies
+You can find most everything in /public. The core rotation script is at **/public/src/Effect.Rotate.js**
+Effect.Rotate depends on Prototype and Scriptaculous. The most recent versions (at the time of this writing)
+are included in the /public/javascripts directory. Everything else in /public supports the demos found
+in /public/index.html.
+
 == License
 Licensed under the terms of the GNU GPL. See the included LICENSE file.
