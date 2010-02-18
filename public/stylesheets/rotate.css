@@ -13,9 +13,17 @@ p {
   margin: 1em 1.5em;
 }
 
-strong, em {
+strong, em, a {
   color: #1af;
   text-shadow: 0px 1px 1px #aaa;
+}
+
+a {
+  text-decoration: underline;
+}
+
+a:hover {
+  font-style: italic;
 }
 
 div#demos {

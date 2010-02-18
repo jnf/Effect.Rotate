@@ -9,8 +9,10 @@ The result? **Effect.Rotate**. Takes an element (or element id) and a delta and 
 rotates the element by the delta. Positive deltas rotate clockwise; negative deltas counter-clockwise. Check out the
 demos to see **Effect.Rotate** in action.
 
-**Note: Right now, IE support is finicky at best. I'll fix it, or (more likely)
+**Note: Right now, IE support is finicky (completely broken) at best. I'll fix it, or (more likely)
 find someone smarter than me to fix it.**
+
+Find the demo at: http://effect-rotate.heroku.com/
 
 == Structure & Dependencies
 You can find most everything in /public. The core rotation script is at **/public/src/Effect.Rotate.js**
@@ -19,4 +21,4 @@ are included in the /public/javascripts directory. Everything else in /public su
 in /public/index.html.
 
 == License
-Licensed under the terms of the GNU GPL. See the included LICENSE file.
+Licensed under the terms of the GNU GPL. See the included LICENSE file for more information
