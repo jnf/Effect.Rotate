@@ -17,7 +17,7 @@ Effect.Rotate = function(element, delta, options) {
     return new Effect.Tween(element, degree, degree + delta, options,
       function(pos) {
         this.degree = pos;
-        var radian = pos * (Math.PI * 2 / 360); //convert degree to radians
+        var radian = pos * (Math.PI / 180); //convert degree to radians
         var costheta = Math.cos(radian);
         var sintheta = Math.sin(radian);
         var style = "filter: progid:DXImageTransform.Microsoft.Matrix(SizingMethod='auto expand', "
